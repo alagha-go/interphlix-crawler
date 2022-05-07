@@ -19,18 +19,6 @@ func CollectAllPages(pages int) {
 	for index:=1; index<pages+1; index++ {
 		CollectPage(index)
 	}
-	SaveTvShows()
-	types.PrintGreen(len(TvShows))
-	types.PrintCyan("done collecting tvshows from all pages")
-
-	for index := range TvShows{
-		CollectTvShow(&TvShows[index])
-		Position = index+1
-		if TvShows[index].Seasons[0].Episodes[0].Available {
-			Available++
-		}
-		SaveTvShows()
-	}
 }
 
 func CollectPage(number int) {
@@ -50,14 +38,18 @@ func CollectTvShows(element *colly.HTMLElement) {
         TvShow.PageUrl = "https://tinyzonetv.to" + element.ChildAttr("a", "href")
 		index := strings.Index(TvShow.PageUrl, "free-")
     	TvShow.Code = TvShow.PageUrl[index+5:]
-		GetSeasons(&TvShow)
-		GetTvShowUrls(&TvShow)
-		TvShows = append(TvShows, TvShow)
-		SaveTvShows()
+		if !TvShowExist(&TvShow) {
+			CollectTvShow(&TvShow)
+			GetSeasons(&TvShow)
+			TvShows = append(TvShows, TvShow)
+			SaveTvShows()
+		}
 	})
 }
 
 func SaveTvShows() {
-	data := types.JsonMarshal(TvShows)
+	SavedTvShows = append(SavedTvShows, TvShows...)
+	data := types.JsonMarshal(SavedTvShows)
 	ioutil.WriteFile("./DB/tvshows.json", data, 0755)
+	TvShows = []types.Movie{}
 }

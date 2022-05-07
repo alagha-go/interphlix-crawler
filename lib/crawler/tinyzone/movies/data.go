@@ -6,16 +6,19 @@ import (
 	"io/ioutil"
 )
 
+var (
+	SavedMovies []types.Movie
+)
 
 func LoadData() {
 	data, err := ioutil.ReadFile("./DB/movies.json")
 	HanleError(err)
-	json.Unmarshal(data, &Movies)
+	json.Unmarshal(data, &SavedMovies)
 }
 
 
 func MovieExist(Movie *types.Movie) bool {
-	for _, movie := range Movies {
+	for _, movie := range SavedMovies {
 		if movie.Code == Movie.Code {
 			return true
 		}

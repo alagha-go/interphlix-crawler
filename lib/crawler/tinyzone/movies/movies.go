@@ -45,13 +45,18 @@ func CollectMovies(element *colly.HTMLElement) {
         Movie.PageUrl = strings.ReplaceAll(Movie.PageUrl, "/movie/", "/watch-movie/")
 		index := strings.Index(Movie.PageUrl, "free-")
     	Movie.Code = Movie.PageUrl[index+5:]
-		Movies = append(Movies, Movie)
+		if !MovieExist(&Movie) {
+			Movies = append(Movies, Movie)
+		}
 	})
 }
 
 func SaveMovies() {
-	types.PrintGreen(len(Movies))
+	LoadData()
+	SavedMovies = append(SavedMovies, Movies...)
+	types.PrintGreen(len(SavedMovies))
 	types.PrintPurple("Done Collecting All pages")
-	data := types.JsonMarshal(Movies)
+	data := types.JsonMarshal(SavedMovies)
 	ioutil.WriteFile("./DB/movies.json", data, 0755)
+	Movies = []types.Movie{}
 }
