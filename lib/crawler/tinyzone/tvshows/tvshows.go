@@ -41,6 +41,15 @@ func CollectTvShows(element *colly.HTMLElement) {
 		if !TvShowExist(&TvShow) {
 			CollectTvShow(&TvShow)
 			GetSeasons(&TvShow)
+			loop:
+			for _, Season := range TvShow.Seasons {
+				for _, Episode := range Season.Episodes {
+					if Episode.Available {
+						TvShow.Available = Episode.Available
+						break loop
+					}
+				}
+			}
 			TvShows = append(TvShows, TvShow)
 			SaveTvShows()
 		}
