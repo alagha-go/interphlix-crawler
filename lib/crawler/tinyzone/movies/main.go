@@ -14,6 +14,7 @@ func Main() {
 
 
 func GetNumberOfPages() int {
+	LoadData()
 	var err error
 	var numberofPages int
 	collector := colly.NewCollector()

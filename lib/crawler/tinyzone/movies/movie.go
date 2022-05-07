@@ -26,13 +26,14 @@ func CollectMovieContent(Movie *types.Movie) {
         Movie.Description = strings.TrimSuffix(Movie.Description, " ")
     })
 
-    SetServers(Movie)
-    AddServer(Movie)
-
+    
     collector.OnHTML(".elements", func(element *colly.HTMLElement) {
         SetElements(element, Movie)
     })
-
+    
+    SetServers(Movie)
+    SetID(Movie)
+    AddServer(Movie)
     SetID(Movie)
     collector.Visit(Movie.PageUrl)
 }
