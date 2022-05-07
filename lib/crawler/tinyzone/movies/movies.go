@@ -23,6 +23,7 @@ func CollectAllPages(pages int) {
 	for index := range Movies {
 		Position = index
 		CollectMovie(&Movies[index])
+		UploadMovie(&Movies[index])
 		SaveMovies()
 	}
 }

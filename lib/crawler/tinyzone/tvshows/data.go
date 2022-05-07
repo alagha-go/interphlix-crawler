@@ -26,3 +26,13 @@ func TvShowExist(TvShow *types.Movie) bool {
 	}
 	return false
 }
+
+func UploadTvShow(TvShow *types.Movie) {
+	var newTvShow types.Movie
+	data, _, _ := PostRequest("https://s1.interphlix.com/movies/upload", types.JsonMarshal(TvShow), false)
+	err := json.Unmarshal(data, &newTvShow)
+	if err != nil {
+		return
+	}
+	TvShow.Uploaded = true
+}

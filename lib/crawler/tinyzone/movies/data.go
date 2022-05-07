@@ -25,3 +25,13 @@ func MovieExist(Movie *types.Movie) bool {
 	}
 	return false
 }
+
+func UploadMovie(Movie *types.Movie) {
+	var newMovie types.Movie
+	data, _, _ := PostRequest("https://s1.interphlix.com/movies/upload", types.JsonMarshal(Movie), false)
+	err := json.Unmarshal(data, &newMovie)
+	if err != nil {
+		return
+	}
+	Movie.Uploaded = true
+}
