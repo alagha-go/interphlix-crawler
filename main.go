@@ -19,7 +19,7 @@ func main() {
 	http.HandleFunc("/movies", Movies)
 	http.HandleFunc("/tv-shows", TvShows)
 
-	http.ListenAndServe(":8000", nil)
+	http.ListenAndServe(":7000", nil)
 }
 
 func Stats(res http.ResponseWriter, req *http.Request) {
