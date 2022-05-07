@@ -9,7 +9,7 @@ import (
 
 
 func CollectTvShow(TvShow *types.Movie) {
-    if len(TvShow.Servers) == 0 {
+    if len(TvShow.Seasons) == 0 {
         CollectTvShowContent(TvShow)
     }
 }

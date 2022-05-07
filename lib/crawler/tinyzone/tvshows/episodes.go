@@ -54,6 +54,7 @@ func CollectServers(element *colly.HTMLElement, Episode *types.Episode) {
 		Server.Name = element.ChildAttr("a", "title")
 		Server.Name = strings.ReplaceAll(Server.Name, "Server ", "")
 		Episode.Servers = append(Episode.Servers, Server)
+		SetID(Episode)
 		AddServer(Episode)
 		SetID(Episode)
 	})
