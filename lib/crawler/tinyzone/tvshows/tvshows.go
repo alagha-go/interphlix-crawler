@@ -50,9 +50,13 @@ func CollectTvShows(element *colly.HTMLElement) {
 					}
 				}
 			}
-			TvShows = append(TvShows, TvShow)
 			UploadTvShow(&TvShow)
+			TvShows = append(TvShows, TvShow)
 			SaveTvShows()
+			Position++
+			if TvShow.Available {
+				Available++
+			}
 		}
 	})
 }

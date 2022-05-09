@@ -20,10 +20,14 @@ func CollectAllPages(pages int) {
 		CollectPage(index)
 	}
 	SaveMovies()
-	for index := range Movies {
+	for index := range SavedMovies {
 		Position = index
-		CollectMovie(&Movies[index])
-		UploadMovie(&Movies[index])
+		CollectMovie(&SavedMovies[index])
+		SetServers(&SavedMovies[index])
+		SetID(&SavedMovies[index])
+		AddServer(&SavedMovies[index])
+		SetID(&SavedMovies[index])
+		UploadMovie(&SavedMovies[index])
 		SaveMovies()
 	}
 }

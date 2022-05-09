@@ -3,6 +3,7 @@ package tvshows
 import (
 	"crawler/lib/types"
 	"encoding/json"
+	"fmt"
 	"io/ioutil"
 )
 
@@ -29,7 +30,8 @@ func TvShowExist(TvShow *types.Movie) bool {
 
 func UploadTvShow(TvShow *types.Movie) {
 	var newTvShow types.Movie
-	data, _, _ := PostRequest("https://s1.interphlix.com/movies/upload", types.JsonMarshal(TvShow), false)
+	data, _, _ := PostRequest("http://localhost:8000/movies/upload", types.JsonMarshal(TvShow), false)
+	fmt.Println(string(data))
 	err := json.Unmarshal(data, &newTvShow)
 	if err != nil {
 		return

@@ -10,7 +10,7 @@ import (
 
 
 func CollectMovie(Movie *types.Movie) {
-    if len(Movie.Servers) == 0 {
+    if !Movie.Uploaded {
         CollectMovieContent(Movie)
     }
 }
@@ -31,10 +31,6 @@ func CollectMovieContent(Movie *types.Movie) {
         SetElements(element, Movie)
     })
     
-    SetServers(Movie)
-    SetID(Movie)
-    AddServer(Movie)
-    SetID(Movie)
     collector.Visit(Movie.PageUrl)
 }
 

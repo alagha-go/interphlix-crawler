@@ -3,6 +3,7 @@ package movies
 import (
 	"crawler/lib/types"
 	"encoding/json"
+	"fmt"
 	"io/ioutil"
 )
 
@@ -28,7 +29,8 @@ func MovieExist(Movie *types.Movie) bool {
 
 func UploadMovie(Movie *types.Movie) {
 	var newMovie types.Movie
-	data, _, _ := PostRequest("https://s1.interphlix.com/movies/upload", types.JsonMarshal(Movie), false)
+	data, _, _ := PostRequest("http://localhost:8000/movies/upload", types.JsonMarshal(Movie), false)
+	fmt.Println(string(data))
 	err := json.Unmarshal(data, &newMovie)
 	if err != nil {
 		return

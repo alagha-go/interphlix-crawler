@@ -32,6 +32,9 @@ func CollectAllEpisodes(element *colly.HTMLElement, Season *types.Season) {
 		Episode.Name = strings.ReplaceAll(Episode.Name, "                    : ", "")
 		Episode.Code = element.ChildAttr("a", "data-id")
 		GetAllServers(&Episode)
+		SetID(&Episode)
+		AddServer(&Episode)
+		SetID(&Episode)
 		Season.Episodes = append(Season.Episodes, Episode)
 	})
 }
@@ -54,8 +57,5 @@ func CollectServers(element *colly.HTMLElement, Episode *types.Episode) {
 		Server.Name = element.ChildAttr("a", "title")
 		Server.Name = strings.ReplaceAll(Server.Name, "Server ", "")
 		Episode.Servers = append(Episode.Servers, Server)
-		SetID(Episode)
-		AddServer(Episode)
-		SetID(Episode)
 	})
 }
