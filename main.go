@@ -55,7 +55,11 @@ func Movies(res http.ResponseWriter, req *http.Request) {
 		if err != nil {
 			start = 0
 		}
-		Response = Movies[start:start+20]
+		if len(Movies) > 20 {
+			Response = Movies[start:start+20]
+		}else {
+			Response = Movies
+		}
 		data := types.JsonMarshal(Response)
 		res.Write(data)
 		return
@@ -103,7 +107,11 @@ func TvShows(res http.ResponseWriter, req *http.Request) {
 		if err != nil {
 			start = 0
 		}
-		Response = TvShows[start:start+20]
+		if len(TvShows) > 20 {
+			Response = TvShows[start:start+20]
+		}else {
+			Response = TvShows
+		}
 		data := types.JsonMarshal(Response)
 		res.Write(data)
 		return
