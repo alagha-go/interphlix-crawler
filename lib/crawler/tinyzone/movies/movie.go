@@ -101,7 +101,7 @@ func AddServer(Movie *types.Movie) {
             collector := colly.NewCollector()
 
 			collector.OnHTML("#user_menu", func(element *colly.HTMLElement) {
-
+                AddServers(element, Movie)
             })
 			collector.Visit(server.Url)
         }

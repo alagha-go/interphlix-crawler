@@ -40,7 +40,7 @@ func AddServer(Episode *types.Episode) {
             collector := colly.NewCollector()
 
 			collector.OnHTML("#user_menu", func(element *colly.HTMLElement) {
-
+				AddServers(element, Episode)
             })
 			collector.Visit(server.Url)
         }
