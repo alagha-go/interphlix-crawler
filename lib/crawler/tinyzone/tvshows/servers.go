@@ -35,11 +35,16 @@ func SetID(Episode *types.Episode) {
 }
 
 func AddServer(Episode *types.Episode) {
-    for _, server := range Episode.Servers {
+    for sindex, server := range Episode.Servers {
+		if server.Name == "UpCloud" {
+			Episode.Servers[sindex].Url = strings.ReplaceAll(server.ID, "embed-4", "embed/m-download")
+			Episode.Servers[sindex].ID = strings.ReplaceAll(server.ID, "https://mzzcloud.life/embed-4/", "")
+			server  = Episode.Servers[sindex]
+		}
         if server.Name == "Vidcloud" || server.Name == "UpCloud" {
             collector := colly.NewCollector()
 
-			collector.OnHTML("#user_menu", func(element *colly.HTMLElement) {
+			collector.OnHTML(".download-list", func(element *colly.HTMLElement) {
 				AddServers(element, Episode)
             })
 			collector.Visit(server.Url)
