@@ -34,7 +34,6 @@ func CollectAllEpisodes(element *colly.HTMLElement, Season *types.Season) {
 		GetAllServers(&Episode)
 		SetID(&Episode)
 		AddServer(&Episode)
-		SetID(&Episode)
 		Season.Episodes = append(Season.Episodes, Episode)
 	})
 }

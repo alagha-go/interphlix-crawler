@@ -26,7 +26,6 @@ func CollectAllPages(pages int) {
 		SetServers(&SavedMovies[index])
 		SetID(&SavedMovies[index])
 		AddServer(&SavedMovies[index])
-		SetID(&SavedMovies[index])
 		UploadMovie(&SavedMovies[index])
 		SaveMovies()
 	}
