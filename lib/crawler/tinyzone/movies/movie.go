@@ -96,11 +96,16 @@ func SetID(Movie *types.Movie) {
 }
 
 func AddServer(Movie *types.Movie) {
-    for _, server := range Movie.Servers {
+    for sindex, server := range Movie.Servers {
+        if server.Name == "UpCloud" {
+			Movie.Servers[sindex].Url = strings.ReplaceAll(server.ID, "embed-4", "embed/m-download")
+			Movie.Servers[sindex].ID = strings.ReplaceAll(server.ID, "https://mzzcloud.life/embed-4/", "")
+			server  = Movie.Servers[sindex]
+		}
         if server.Name == "Vidcloud" || server.Name == "UpCloud" {
             collector := colly.NewCollector()
 
-			collector.OnHTML("#user_menu", func(element *colly.HTMLElement) {
+			collector.OnHTML(".download-list", func(element *colly.HTMLElement) {
                 AddServers(element, Movie)
             })
 			collector.Visit(server.Url)
