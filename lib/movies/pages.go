@@ -5,8 +5,9 @@ import (
 	"io/ioutil"
 	"strings"
 
-	"github.com/gocolly/colly"
 	"github.com/cheggaaa/pb/v3"
+	"github.com/gocolly/colly"
+	"go.mongodb.org/mongo-driver/bson/primitive"
 )
 
 
@@ -40,6 +41,7 @@ func CollectPageMovies(page int) {
 func CollectMovies(element *colly.HTMLElement) {
 	element.ForEach(".flw-item", func(_ int, element *colly.HTMLElement) {
 		var Movie Movie
+		Movie.ID = primitive.NewObjectID()
         Movie.Title = element.ChildAttr("a", "title")
         Movie.ImageUrl = element.ChildAttr("img", "data-src")
         Movie.PageUrl = "https://tinyzonetv.to" + element.ChildAttr("a", "href")
