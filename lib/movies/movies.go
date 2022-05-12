@@ -15,7 +15,7 @@ func CollectAllMovies() {
 func CollectMovie(index int) {
 	Movie := PagesMovies[index]
 	if !Movie.Collected {
-
+		Movie.CollectMovieContent()
 	}
 }
 
