@@ -11,10 +11,11 @@ import (
 
 var (
 	PagesMovies []Movie
+	DBPages		[]Movie
 )
 
 func Main() {
-
+	LoadDBPages()
 }
 
 
