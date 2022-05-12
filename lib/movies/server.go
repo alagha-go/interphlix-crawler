@@ -5,6 +5,7 @@ import (
 	"strings"
 
 	"github.com/gocolly/colly"
+	"go.mongodb.org/mongo-driver/bson/primitive"
 )
 
 
@@ -16,6 +17,7 @@ func (Movie *Movie)SetServers() {
     collector.OnHTML(".nav", func(element *colly.HTMLElement) {
         element.ForEach(".nav-item", func(index int, element *colly.HTMLElement) {
             var server Server
+			server.ID = primitive.NewObjectID()
             server.WatchID = element.ChildAttr("a", "data-linkid")
             server.Name = element.ChildAttr("a", "title")
             server.Name = strings.ReplaceAll(server.Name, "Server ", "")
@@ -25,6 +27,7 @@ func (Movie *Movie)SetServers() {
     collector.Visit(url)
 	Movie.SetID()
 	Movie.AddServer()
+	Movie.SetServer()
 }
 
 
@@ -73,6 +76,7 @@ func (Movie *Movie)AddServers(element *colly.HTMLElement) {
     element.ForEach(".dl-site", func(_ int, element *colly.HTMLElement) {
 		var exist bool = false
 		var server Server
+		server.ID = primitive.NewObjectID()
 		server.Name = element.ChildText(".site-name")
 		server.Url = element.ChildAttr("a", "href")
 		for index, serve := range Movie.Servers {
@@ -91,7 +95,7 @@ func (Movie *Movie)AddServers(element *colly.HTMLElement) {
 func (Movie *Movie) SetServer() {
 	for index := range Movie.Servers {
 		if Movie.Servers[index].Name == "Streamlare" {
-			Mo
+			Movie.Server = &Movie.Servers[index]
 		}
 	}
 }
