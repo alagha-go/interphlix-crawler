@@ -1,6 +1,7 @@
 package movies
 
 import (
+	"log"
 	"strconv"
 	"strings"
 
@@ -29,6 +30,7 @@ func GetNumberOfPages() int {
 			if title == "Last" {
 				href = strings.ReplaceAll(href, "/movie?page=", "")
 				numberofPages, err = strconv.Atoi(href)
+				HanleError(err)
 			}
 		})
 	})
@@ -36,4 +38,12 @@ func GetNumberOfPages() int {
 	collector.Visit("https://tinyzonetv.to/movie")
 
 	return numberofPages
+}
+
+
+
+func HanleError(err error) {
+	if err != nil {
+		log.Panic(err)
+	}
 }
