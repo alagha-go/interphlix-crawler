@@ -46,7 +46,7 @@ func CollectMovies(element *colly.HTMLElement) {
 }
 
 func LoadDBPages() {
-	data, err := ioutil.ReadFile(".DB/Movies/pages.json")
+	data, err := ioutil.ReadFile("./DB/Movies/pages.json")
 	HanleError(err)
 	json.Unmarshal(data, &DBPages)
 }
