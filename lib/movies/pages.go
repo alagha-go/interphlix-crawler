@@ -22,6 +22,7 @@ func CollectPages(PagesLength int) {
 		}
 		bar.Increment()
 	}
+	SavePagesData()
 	PrintGreen("done collecting all the pages data")
 }
 
@@ -67,4 +68,10 @@ func MoviesAvailable() bool {
 		}
 	}
 	return true
+}
+
+
+func SavePagesData() {
+	data := JsonMarshal(PagesMovies)
+	ioutil.WriteFile("./DB/Movies/pages.json", data, 0755)
 }
