@@ -6,18 +6,21 @@ import (
 	"strings"
 
 	"github.com/gocolly/colly"
+	"github.com/cheggaaa/pb/v3"
 )
 
 
 func CollectPages(PagesLength int) {
+	bar := pb.StartNew(PagesLength)
 	for index:=1; index<PagesLength+1; index++ {
 		CollectPageMovies(index)
-		PrintCyan(index)
 		if index == 1 {
 			if !MoviesAvailable() {
+				bar.Finish()
 				break
 			}
 		}
+		bar.Increment()
 	}
 	PrintGreen("done collecting all the pages data")
 }
