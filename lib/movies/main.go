@@ -1,6 +1,8 @@
 package movies
 
 import (
+	"bytes"
+	"encoding/json"
 	"log"
 	"strconv"
 	"strings"
@@ -42,6 +44,14 @@ func GetNumberOfPages() int {
 	return numberofPages
 }
 
+
+func JsonMarshal(data interface{}) []byte {
+	var buff bytes.Buffer
+	encoder := json.NewEncoder(&buff)
+	encoder.SetEscapeHTML(false)
+	encoder.Encode(data)
+	return buff.Bytes()
+}
 
 
 func HanleError(err error) {
