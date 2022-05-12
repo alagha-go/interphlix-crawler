@@ -16,6 +16,7 @@ var (
 
 func Main() {
 	LoadDBPages()
+	CollectPages(GetNumberOfPages())
 }
 
 
