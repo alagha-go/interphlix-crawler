@@ -13,6 +13,8 @@ import (
 
 var (
 	PagesMovies []Movie
+	Movies		[]Movie
+	DBMovies	[]Movie
 	DBPages		[]Movie
 )
 
