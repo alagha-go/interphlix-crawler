@@ -2,9 +2,21 @@ package movies
 
 import (
 	"bytes"
+	"encoding/json"
 	"io/ioutil"
 	"net/http"
 )
+
+
+func UnmarshalLinkResponse(data []byte) (LinkResponse, error) {
+	var r LinkResponse
+	err := json.Unmarshal(data, &r)
+	return r, err
+}
+
+func (r *LinkResponse) Marshal() ([]byte, error) {
+	return json.Marshal(r)
+}
 
 
 /// func to send http Post Request
