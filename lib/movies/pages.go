@@ -3,6 +3,7 @@ package movies
 import (
 	"encoding/json"
 	"io/ioutil"
+	"strconv"
 	"strings"
 
 	"github.com/cheggaaa/pb/v3"
@@ -29,7 +30,7 @@ func CollectPages(PagesLength int) {
 
 
 func CollectPageMovies(page int) {
-	url := "https://tinyzonetv.to/movie?page=" + string(rune(page))
+	url := "https://tinyzonetv.to/movie?page=" + strconv.Itoa(page)
 	collector := colly.NewCollector()
 
 	collector.OnHTML(".film_list-wrap", CollectMovies)
