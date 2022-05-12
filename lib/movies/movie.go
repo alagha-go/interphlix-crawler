@@ -1,6 +1,10 @@
 package movies
 
-import "github.com/gocolly/colly"
+import (
+	"strings"
+
+	"github.com/gocolly/colly"
+)
 
 
 func (Movie *Movie)CollectMovieContent() {
