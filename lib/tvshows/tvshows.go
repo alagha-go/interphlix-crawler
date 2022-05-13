@@ -28,6 +28,7 @@ func CollectTvShow(index int) {
 		if TvShow.Uploaded {
 			UploadedMovies++
 		}
+		MoviesPosition++
 	}
 }
 
