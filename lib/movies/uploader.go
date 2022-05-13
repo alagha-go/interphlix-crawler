@@ -17,7 +17,7 @@ func UploadUnUploadedMovies() {
 		if !Movies[index].Uploaded && Movies[index].Collected{
 			Movies[index].Upload()
 			if !Movies[index].Uploaded {
-				Movies[index].ID = primitive.NewObjectID()
+				Movies[index].SetMovieID()
 				Movies[index].Upload()
 			}
 			ioutil.WriteFile("./DB/Movies/movies.json", JsonMarshal(Movies), 0755)
