@@ -4,6 +4,7 @@ import (
 	"strings"
 
 	"github.com/gocolly/colly"
+	"go.mongodb.org/mongo-driver/bson/primitive"
 )
 
 
@@ -37,4 +38,13 @@ func (Movie *Movie)SetElements(element *colly.HTMLElement) {
     element.ForEach(".row-line", func(index int, element *colly.HTMLElement){
         functions[index](element)
     })
+}
+
+func (Movie *Movie) SetMovieID() {
+    ID := primitive.NewObjectID()
+    for _, movie := range Movies {
+        if ID == movie.ID {
+            Movie.SetMovieID()
+        }
+    }
 }
