@@ -61,3 +61,10 @@ func (TvShow *Movie) IsAvailable() {
 		}
 	}
 }
+
+
+func LoadDBTvShows() {
+	data, err := ioutil.ReadFile("./DB/Tvshows/tvshows.json.json")
+	HanleError(err)
+	json.Unmarshal(data, &DBTvShows)
+}
