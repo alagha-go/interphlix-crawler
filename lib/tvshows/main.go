@@ -14,6 +14,7 @@ var (
 	PagesTvShows []Movie
 	DBPages		[]Movie
 	TvShows		[]Movie
+	DBTvShows	[]Movie
 	PagesPosition int
 	MoviesPosition int
 	Available int
@@ -22,8 +23,10 @@ var (
 
 func Main() {
 	LoadDBPages()
+	LoadDBTvShows()
 	CollectPages(GetNumberOfPages())
 	CollectAllTvShows()
+	UploadUnUploadedTvShows()
 }
 
 func GetNumberOfPages() int {
