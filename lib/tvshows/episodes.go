@@ -1,10 +1,12 @@
 package tvshows
 
 import (
+	"fmt"
 	"strconv"
 	"strings"
 
 	"github.com/gocolly/colly"
+	"go.mongodb.org/mongo-driver/bson/primitive"
 )
 
 
@@ -31,4 +33,20 @@ func (Season *Season)CollectAllEpisodes(element *colly.HTMLElement) {
 		Episode.SetServers()
 		Season.Episodes = append(Season.Episodes, Episode)
 	})
+}
+
+
+func (Season *Season) EpisodeExist(Episode Episode) bool {
+	for index := range Season.Episodes {
+		if Episode.Code == Season.Episodes[index].Code {
+			return true
+		}
+	}
+	return false
+}
+
+func (Episode *Episode) UpdateEpisode(MovieID, SeasonID primitive.ObjectID) {
+	url := fmt.Sprintf("https://s1.interphlix.com/movies/%s/%s/updateepisode", Movie.ID.Hex(), SeasonID)
+	body := JsonMarshal(Episode)
+	PostRequest(url, body, false)
 }
