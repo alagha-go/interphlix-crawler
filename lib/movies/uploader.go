@@ -14,7 +14,7 @@ func UploadUnUploadedMovies() {
 	HanleError(err)
 	json.Unmarshal(data, &Movies)
 	for index := range Movies {
-		if !Movies[index].Uploaded {
+		if !Movies[index].Uploaded && Movies[index].Collected{
 			Movies[index].Upload()
 			if !Movies[index].Uploaded {
 				Movies[index].ID = primitive.NewObjectID()
