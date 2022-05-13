@@ -24,6 +24,7 @@ func CollectPages(PagesLength int) {
 			}
 		}
 		bar.Increment()
+		PagesPosition = index
 	}
 	bar.Finish()
 	SavePagesData()
