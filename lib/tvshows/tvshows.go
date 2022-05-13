@@ -16,6 +16,7 @@ func CollectTvShow(index int) {
 	if !TvShow.Collected {
 		TvShow.CollectTvShowContent()
 		PagesTvShows[index].Collected = true
+		TvShow.SetMovieID()
 		SavePagesData()
 		TvShow.Collected = true
 		TvShow.IsAvailable()
