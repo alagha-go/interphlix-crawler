@@ -17,6 +17,8 @@ func CollectTvShow(index int) {
 		TvShow.CollectTvShowContent()
 		PagesTvShows[index].Collected = true
 		SavePagesData()
+		TvShow.Collected = true
+		TvShow.IsAvailable()
 		TvShow.Upload()
 		TvShows = append(TvShows, TvShow)
 		SaveTvShows()
@@ -38,4 +40,16 @@ func (movie *Movie) Upload() {
 		return
 	}
 	movie.Uploaded = true
+}
+
+
+func (TvShow *Movie) IsAvailable() {
+	for _, Season := range TvShow.Seasons {
+		for _, Episode := range Season.Episodes {
+			if Episode.Server.Name == "Streamlare" {
+				TvShow.Available = true
+				return
+			}
+		}
+	}
 }
