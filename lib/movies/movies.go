@@ -18,6 +18,7 @@ func CollectMovie(index int) {
 		Movie.CollectMovieContent()
 		PagesMovies[index].Collected = true
 		SavePagesData()
+		Movie.Collected = true
 		Movie.IsAvailable()
 		Movie.Upload()
 		Movies = append(Movies, Movie)
