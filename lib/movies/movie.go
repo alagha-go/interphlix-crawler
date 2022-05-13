@@ -47,4 +47,5 @@ func (Movie *Movie) SetMovieID() {
             Movie.SetMovieID()
         }
     }
+    Movie.ID = ID
 }
