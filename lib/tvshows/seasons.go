@@ -1,6 +1,7 @@
 package tvshows
 
 import (
+	"fmt"
 
 	"github.com/gocolly/colly"
 )
@@ -24,4 +25,20 @@ func (TvShow *Movie)CollectAllSeasons(element *colly.HTMLElement) {
 		Season.GetEpisodes()
 		TvShow.Seasons = append(TvShow.Seasons, Season)
 	})
+}
+
+
+func (TvShow *Movie) SeasonExist(Season Season) bool {
+	for index := range TvShow.Seasons {
+		if Season.Code == TvShow.Seasons[index].Code {
+			return true
+		}
+	}
+	return false
+}
+
+func (TvShow *Movie) UpdateSeason(Season Season) {
+	url := fmt.Sprintf("https://s1.interphlix.com/movies/%s/updateseason", TvShow.ID.Hex())
+	body := JsonMarshal(Season)
+	PostRequest(url, body, false)
 }
