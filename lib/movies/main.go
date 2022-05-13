@@ -26,6 +26,7 @@ var (
 func Main() {
 	for {
 		LoadDBPages()
+		LoadDBMovies()
 		CollectPages(GetNumberOfPages())
 		CollectAllMovies()
 		UploadUnUploadedMovies()
