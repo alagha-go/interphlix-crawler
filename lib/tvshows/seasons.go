@@ -24,7 +24,4 @@ func (TvShow *Movie)CollectAllSeasons(element *colly.HTMLElement) {
 		Season.GetEpisodes()
 		TvShow.Seasons = append(TvShow.Seasons, Season)
 	})
-	// TvShow.Seasons = seasons
-	// PrintCyan(len(seasons))
-	// PrintCyan(len(TvShow.Seasons))
 }
