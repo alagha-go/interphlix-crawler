@@ -20,6 +20,7 @@ type Movie struct {
     Urls										[]string								`json:"urls,omitempty" bson:"urls,omitempty"`
 	Collected									bool									`json:"collected,omitempty" bson:"collected,omitempty"`
     Genres										[]string								`json:"genre,omitempty" bson:"genre,omitempty"`
+    Seasons                                     []Season                                `json:"seasons,omitempty" bson:"seasons,omitempty"`
 	Server										*Server									`json:"server,omitempty" bson:"server,omitempty"`
     Servers										[]Server								`json:"servers,omitempty" bson:"servers,omitempty"`
     Casts										[]string								`json:"casts,omitempty" bson:"casts,omitempty"`
