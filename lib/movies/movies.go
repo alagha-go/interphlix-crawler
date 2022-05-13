@@ -18,6 +18,7 @@ func CollectMovie(index int) {
 		Movie.CollectMovieContent()
 		PagesMovies[index].Collected = true
 		SavePagesData()
+		Movie.IsAvailable()
 		Movie.Upload()
 		Movies = append(Movies, Movie)
 		SaveMovies()
@@ -39,4 +40,10 @@ func (movie *Movie) Upload() {
 		return
 	}
 	movie.Uploaded = true
+}
+
+func (Movie *Movie) IsAvailable() {
+	if Movie.Server.Name == "Streamlare" {
+		Movie.Available = true
+	}
 }
