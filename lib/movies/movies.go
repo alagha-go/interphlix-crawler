@@ -17,6 +17,7 @@ func CollectMovie(index int) {
 	if !Movie.Collected {
 		Movie.CollectMovieContent()
 		PagesMovies[index].Collected = true
+		Movie.SetMovieID()
 		SavePagesData()
 		Movie.Collected = true
 		Movie.IsAvailable()
