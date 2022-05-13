@@ -31,6 +31,10 @@ func CollectMovie(index int) {
 		if Movie.Uploaded {
 			UploadedMovies++
 		}
+	}else {
+		Movie.SetDBMovie()
+		Movies = append(Movies, Movie)
+		SaveMovies()
 	}
 }
 
@@ -54,5 +58,14 @@ func (movie *Movie) Upload() {
 func (Movie *Movie) IsAvailable() {
 	if Movie.Server.Name == "Streamlare" {
 		Movie.Available = true
+	}
+}
+
+
+func (Movie *Movie) SetDBMovie() {
+	for index := range DBMovies {
+		if Movie.ID == DBMovies[index].ID {
+			Movie = &DBMovies[index]
+		}
 	}
 }
