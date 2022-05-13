@@ -22,6 +22,13 @@ func CollectMovie(index int) {
 		Movie.Upload()
 		Movies = append(Movies, Movie)
 		SaveMovies()
+		MoviesPosition++
+		if Movie.Available {
+			Available++
+		}
+		if Movie.Uploaded {
+			UploadedMovies++
+		}
 	}
 }
 
