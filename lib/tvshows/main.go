@@ -6,6 +6,7 @@ import (
 	"log"
 	"strconv"
 	"strings"
+	"time"
 
 	"github.com/gocolly/colly"
 )
@@ -22,11 +23,14 @@ var (
 )
 
 func Main() {
-	LoadDBPages()
-	LoadDBTvShows()
-	CollectPages(GetNumberOfPages())
-	CollectAllTvShows()
-	UploadUnUploadedTvShows()
+	for {
+		LoadDBPages()
+		LoadDBTvShows()
+		CollectPages(GetNumberOfPages())
+		CollectAllTvShows()
+		UploadUnUploadedTvShows()
+		time.Sleep(48*time.Hour)
+	}
 }
 
 func GetNumberOfPages() int {
