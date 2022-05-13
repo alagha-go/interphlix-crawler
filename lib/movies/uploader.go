@@ -3,8 +3,6 @@ package movies
 import (
 	"encoding/json"
 	"io/ioutil"
-
-	"go.mongodb.org/mongo-driver/bson/primitive"
 )
 
 
