@@ -22,6 +22,12 @@ func CollectTvShow(index int) {
 		TvShow.Upload()
 		TvShows = append(TvShows, TvShow)
 		SaveTvShows()
+		if TvShow.Available {
+			Available++
+		}
+		if TvShow.Uploaded {
+			UploadedMovies++
+		}
 	}
 }
 
