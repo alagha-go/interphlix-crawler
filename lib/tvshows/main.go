@@ -14,6 +14,9 @@ var (
 	PagesTvShows []Movie
 	DBPages		[]Movie
 	TvShows		[]Movie
+	PagesPosition int
+	MoviesPosition int
+	Available int
 )
 
 func Main() {
