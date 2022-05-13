@@ -17,6 +17,7 @@ var (
 	PagesPosition int
 	MoviesPosition int
 	Available int
+	UploadedMovies int
 )
 
 func Main() {
