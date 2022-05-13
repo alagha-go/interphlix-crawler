@@ -69,3 +69,10 @@ func (Movie *Movie) SetDBMovie() {
 		}
 	}
 }
+
+
+func LoadDBMovies() {
+	data, err := ioutil.ReadFile("./DB/Movies/movies.json")
+	HanleError(err)
+	json.Unmarshal(data, &DBMovies)
+}
