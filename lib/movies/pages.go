@@ -24,6 +24,7 @@ func CollectPages(PagesLength int) {
 		}
 		bar.Increment()
 	}
+	bar.Finish()
 	SavePagesData()
 	PrintGreen("done collecting all the pages data")
 }
