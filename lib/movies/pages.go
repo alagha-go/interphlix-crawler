@@ -78,9 +78,3 @@ func SavePagesData() {
 	data := JsonMarshal(PagesMovies)
 	ioutil.WriteFile("./DB/Movies/pages.json", data, 0755)
 }
-
-func LoadDBMovies() {
-	data, err := ioutil.ReadFile("./DB/Movies/movies.json")
-	HanleError(err)
-	json.Unmarshal(data, &DBMovies)
-}
