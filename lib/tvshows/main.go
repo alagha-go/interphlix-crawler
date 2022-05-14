@@ -45,7 +45,7 @@ func GetNumberOfPages() int {
 			title := element.ChildAttr("a", "title")
 			href := element.ChildAttr("a", "href")
 			if title == "Last" {
-				href = strings.ReplaceAll(href, "/movie?page=", "")
+				href = strings.ReplaceAll(href, "/tv-show?page=", "")
 				numberofPages, err = strconv.Atoi(href)
 				HanleError(err)
 			}
