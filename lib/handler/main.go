@@ -13,6 +13,14 @@ func Main() {
 	go movies.Main()
 	go tvshows.Main()
 	http.HandleFunc("/", GetStats)
+	http.HandleFunc("/movies/pages", MoviePages)
+	http.HandleFunc("/tv-shows/pages", TvShowsPages)
+	http.HandleFunc("/movies/all", GetAllMovies)
+	http.HandleFunc("/tv-shows/all", GetAllTvShows)
+	http.HandleFunc("/movies/unavailable", GetUnAvailableMovies)
+	http.HandleFunc("/tv-shows/unavailable", GetUnAvailableTvShows)
+	http.HandleFunc("/movies/unuploaded", GetUnUploadedMovies)
+	http.HandleFunc("/tv-shows/unuploaded", GetUnUploadedTvShows)
 }
 
 func GetStats(res http.ResponseWriter, req *http.Request) {
