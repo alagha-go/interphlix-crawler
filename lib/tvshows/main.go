@@ -52,7 +52,7 @@ func GetNumberOfPages() int {
 		})
 	})
 
-	collector.Visit("https://tinyzonetv.to/movie")
+	collector.Visit("https://tinyzonetv.to/tv-show")
 
 	return numberofPages
 }
