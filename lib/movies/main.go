@@ -17,6 +17,7 @@ var (
 	Movies		[]Movie
 	DBMovies	[]Movie
 	DBPages		[]Movie
+	LoopNumber int
 	PagesPosition int
 	MoviesPosition int
 	Available int
@@ -30,6 +31,7 @@ func Main() {
 		CollectPages(GetNumberOfPages())
 		CollectAllMovies()
 		UploadUnUploadedMovies()
+		LoopNumber++
 		time.Sleep(48*time.Hour)
 	}
 }
