@@ -30,6 +30,10 @@ func CollectTvShow(index int) {
 		if TvShow.Uploaded {
 			UploadedMovies++
 		}
+	}else {
+		TvShow.CollectTvShowContent()
+		TvShow.CheckUpdate()
+		TvShows = append(TvShows, TvShow)
 	}
 }
 
