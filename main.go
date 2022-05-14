@@ -1,7 +1,15 @@
 package main
 
-import "crawler/lib/movies"
+import (
+	"crawler/lib/handler"
+	"net/http"
+)
+
+var (
+	PORT = ":7000"
+)
 
 func main() {
-	movies.Main()
+	handler.Main()
+	http.ListenAndServe(PORT, nil)
 }
