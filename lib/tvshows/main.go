@@ -16,6 +16,7 @@ var (
 	DBPages		[]Movie
 	TvShows		[]Movie
 	DBTvShows	[]Movie
+	LoopNumber int
 	PagesPosition int
 	MoviesPosition int
 	Available int
@@ -29,6 +30,7 @@ func Main() {
 		CollectPages(GetNumberOfPages())
 		CollectAllTvShows()
 		UploadUnUploadedTvShows()
+		LoopNumber++
 		time.Sleep(48*time.Hour)
 	}
 }
