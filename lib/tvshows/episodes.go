@@ -22,6 +22,7 @@ func (Season *Season)GetEpisodes() {
 func (Season *Season)CollectAllEpisodes(element *colly.HTMLElement) {
 	element.ForEach(".nav-item", func(_ int, element *colly.HTMLElement) {
 		var Episode Episode
+		Episode.ID = primitive.NewObjectID()
 		Episode.Name = element.ChildText("a")
 		index := strings.Index(Episode.Name, "Eps")
 		end := strings.Index(Episode.Name, "\n")
