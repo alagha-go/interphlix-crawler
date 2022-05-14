@@ -40,7 +40,7 @@ func (TvShow *Movie) SeasonExist(Season Season) bool {
 }
 
 func (TvShow *Movie) UpdateSeason(Season Season) {
-	url := fmt.Sprintf("https://s1.interphlix.com/movies/%s/updateseason", TvShow.ID.Hex())
+	url := fmt.Sprintf("https://s1.interphlix.com/tv-shows/%s/addseason", TvShow.ID.Hex())
 	body := JsonMarshal(Season)
 	PostRequest(url, body, false)
 }

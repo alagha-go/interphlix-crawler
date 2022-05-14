@@ -47,7 +47,7 @@ func (Season *Season) EpisodeExist(Episode Episode) bool {
 }
 
 func (Episode *Episode) UpdateEpisode(MovieID, SeasonID primitive.ObjectID) {
-	url := fmt.Sprintf("https://s1.interphlix.com/movies/%s/%s/updateepisode", MovieID.Hex(), SeasonID)
+	url := fmt.Sprintf("https://s1.interphlix.com/tv-shows/%s/%s/addepisode", MovieID.Hex(), SeasonID)
 	body := JsonMarshal(Episode)
 	PostRequest(url, body, false)
 }
