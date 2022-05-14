@@ -50,3 +50,18 @@ func (TvShow *Movie) SetMovieID() {
     }
     TvShow.ID = ID
 }
+
+
+func (TvShow *Movie) CheckUpdate() {
+    for Sindex := range TvShow.Seasons {
+        if !TvShow.SeasonExist(TvShow.Seasons[Sindex]) {
+            TvShow.UpdateSeason(TvShow.Seasons[Sindex])
+        }else {
+            for index := range TvShow.Seasons[Sindex].Episodes {
+                if !TvShow.Seasons[index].EpisodeExist(TvShow.Seasons[Sindex].Episodes[index]) {
+                    TvShow.Seasons[Sindex].Episodes[index].UpdateEpisode(TvShow.ID, TvShow.Seasons[index].ID)
+                }
+            }
+        }
+    }
+}
