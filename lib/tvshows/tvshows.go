@@ -68,7 +68,7 @@ func (TvShow *Movie) IsAvailable() {
 
 
 func LoadDBTvShows() {
-	data, err := ioutil.ReadFile("./DB/Tvshows/tvshows.json.json")
+	data, err := ioutil.ReadFile("./DB/Tvshows/tvshows.json")
 	HanleError(err)
 	json.Unmarshal(data, &DBTvShows)
 }
