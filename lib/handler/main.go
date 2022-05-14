@@ -9,6 +9,8 @@ import (
 
 
 func Main() {
+	go movies.Main()
+	go tvshows.Main()
 	http.HandleFunc("/", GetStats)
 }
 
