@@ -14,7 +14,7 @@ import (
 
 
 func CollectPages(PagesLength int) {
-	bar := pb.StartNew(PagesLength-1)
+	bar := pb.StartNew(PagesLength)
 	for index:=1; index < PagesLength+1; index++ {
 		CollectPageMovies(index)
 		bar.Increment()
