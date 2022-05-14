@@ -17,12 +17,6 @@ func CollectPages(PagesLength int) {
 	bar := pb.StartNew(PagesLength-1)
 	for index:=1; index < PagesLength+1; index++ {
 		CollectPageMovies(index)
-		if index == 1 {
-			if !MoviesAvailable() {
-				bar.Finish()
-				break
-			}
-		}
 		bar.Increment()
 		PagesPosition = index
 	}
@@ -61,20 +55,6 @@ func LoadDBPages() {
 	json.Unmarshal(data, &DBPages)
 }
 
-func MoviesAvailable() bool {
-	for _, PageMovie := range PagesTvShows {
-		available := false
-		for _, DBPageMovie := range DBPages {
-			if PageMovie.Code == DBPageMovie.Code{
-				available = true
-			}
-		}
-		if !available {
-			return available
-		}
-	}
-	return true
-}
 
 
 func SavePagesData() {
