@@ -4,6 +4,7 @@ import (
 	"crawler/lib/movies"
 	"crawler/lib/tvshows"
 	"encoding/json"
+	"log"
 	"net/http"
 )
 
@@ -20,4 +21,10 @@ func GetStats(res http.ResponseWriter, req *http.Request) {
 	var StatsData = []Stats{MovieType, TvShowType}
 	res.WriteHeader(200)
 	json.NewEncoder(res).Encode(StatsData)
+}
+
+func HandleError(err error) {
+	if err != nil {
+		log.Panic(err)
+	}
 }
