@@ -53,15 +53,28 @@ func (TvShow *Movie) SetMovieID() {
 
 
 func (TvShow *Movie) CheckUpdate() {
+    Tvshow := FindTvShow(TvShow.ID)
+    if TvShow.ID != Tvshow.ID {
+        return
+    }
     for Sindex := range TvShow.Seasons {
-        if !TvShow.SeasonExist(TvShow.Seasons[Sindex]) {
-            TvShow.UpdateSeason(TvShow.Seasons[Sindex])
+        if !Tvshow.SeasonExist(TvShow.Seasons[Sindex]) {
+            Tvshow.UpdateSeason(TvShow.Seasons[Sindex])
         }else {
             for index := range TvShow.Seasons[Sindex].Episodes {
-                if !TvShow.Seasons[index].EpisodeExist(TvShow.Seasons[Sindex].Episodes[index]) {
-                    TvShow.Seasons[Sindex].Episodes[index].UpdateEpisode(TvShow.ID, TvShow.Seasons[index].ID)
+                if !Tvshow.Seasons[index].EpisodeExist(TvShow.Seasons[Sindex].Episodes[index]) {
+                    Tvshow.Seasons[Sindex].Episodes[index].UpdateEpisode(Tvshow.ID, Tvshow.Seasons[index].ID)
                 }
             }
         }
     }
+}
+
+func FindTvShow(ID primitive.ObjectID) Movie {
+    for _, TvShow := range DBTvShows {
+        if TvShow.ID.Hex() == ID.Hex() {
+            return TvShow
+        }
+    }
+    return Movie{}
 }
