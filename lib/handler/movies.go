@@ -27,3 +27,17 @@ func GetUnAvailableMovies(res http.ResponseWriter, req *http.Request) {
 	}
 	json.NewEncoder(res).Encode(UnAvailableMovies)
 }
+
+func GetUnUploadedMovies(res http.ResponseWriter, req *http.Request) {
+	var Movies []movies.Movie
+	var UnUploadeMovies []movies.Movie
+	data, err := ioutil.ReadFile("./DB/Movies/movies.json")
+	HandleError(err)
+	json.Unmarshal(data, &Movies)
+	for _, Movie := range Movies {
+		if !Movie.Uploaded {
+			UnUploadeMovies = append(UnUploadeMovies, Movie)
+		}
+	}
+	json.NewEncoder(res).Encode(UnUploadeMovies)
+}
