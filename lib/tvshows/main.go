@@ -16,7 +16,7 @@ var (
 	DBPages		[]Movie
 	TvShows		[]Movie
 	DBTvShows	[]Movie
-	LoopNumber int
+	LoopNumber int = 1
 	PagesPosition int
 	MoviesPosition int
 	Available int

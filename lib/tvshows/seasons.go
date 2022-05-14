@@ -4,6 +4,7 @@ import (
 	"fmt"
 
 	"github.com/gocolly/colly"
+	"go.mongodb.org/mongo-driver/bson/primitive"
 )
 
 
@@ -19,6 +20,7 @@ func (TvShow *Movie)GetSeasons() {
 func (TvShow *Movie)CollectAllSeasons(element *colly.HTMLElement) {
 	element.ForEach("a", func(index int, element *colly.HTMLElement) {
 		var Season Season
+		Season.ID = primitive.NewObjectID()
 		Season.Index = index
 		Season.Code = element.Attr("data-id")
 		Season.Name = element.Text
