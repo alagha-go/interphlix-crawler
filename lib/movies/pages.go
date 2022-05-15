@@ -42,6 +42,7 @@ func CollectMovies(element *colly.HTMLElement) {
         Movie.PageUrl = "https://tinyzonetv.to" + element.ChildAttr("a", "href")
 		index := strings.Index(Movie.PageUrl, "free-")
     	Movie.Code = Movie.PageUrl[index+5:]
+		Movie.Type = "Movie"
 		PagesMovies = append(PagesMovies, Movie)
 	})
 }
