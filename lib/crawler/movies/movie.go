@@ -69,5 +69,6 @@ func (movie *Movie) Upload() {
 	if err != nil {
 		return
 	}
+    Uploaded++
 	movie.Uploaded = true
 }
