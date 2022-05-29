@@ -18,6 +18,7 @@ func CollectPages(PagesLength int) {
 		if index % 50 == 0 {
 			PrintYellow(fmt.Sprintf("Movies    :%d",index))
 		}
+		SaveMovies()
 	}
 	PrintBlue(len(Movies))
 	SaveMovies()
