@@ -28,6 +28,15 @@ func CollectPages(PagesLength int) {
 	for index := range TvShows {
 		CurrentMovie = index+1
 		if !TvShows[index].Collected {
+			for Sindex := range TvShows[index].Seasons {
+				for Eindex := range TvShows[index].Seasons[Sindex].Episodes {
+					Episode := TvShows[index].Seasons[Sindex].Episodes[Eindex]
+					if Episode.Available {
+						Available++
+						TvShows[index].Available = true
+					}
+				}
+			}
 			TvShows[index].GetSeasons()
 			TvShows[index].Collected = true
 		}
