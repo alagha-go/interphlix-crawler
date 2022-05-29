@@ -8,7 +8,7 @@ import (
 
 func UploadUnUploadedTvShows() {
 	var TvShows []TvShow
-	data, err := ioutil.ReadFile("./DB/TvShows/tvshows.json")
+	data, err := ioutil.ReadFile("./DB/Tvshows/tvshows.json")
 	HanleError(err)
 	json.Unmarshal(data, &TvShows)
 	for index := range TvShows {
