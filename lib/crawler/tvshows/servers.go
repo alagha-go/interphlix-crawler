@@ -92,6 +92,7 @@ func (Episode *Episode) SetServer() {
 	for index := range Episode.Servers {
 		if Episode.Servers[index].Name == "Streamlare" {
 			Episode.Server = &Episode.Servers[index]
+			Episode.Available = true
 		}
 	}
 }
