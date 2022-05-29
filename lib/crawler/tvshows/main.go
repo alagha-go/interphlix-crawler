@@ -7,6 +7,7 @@ import (
 	"log"
 	"strconv"
 	"strings"
+	"time"
 
 	"github.com/gocolly/colly"
 )
@@ -31,6 +32,7 @@ func Main() {
 		LoadTvShows()
 		CollectPages(GetNumberOfPages())
 		UploadUnUploadedTvShows()
+		time.Sleep(48*time.Hour)
 	}
 }
 
