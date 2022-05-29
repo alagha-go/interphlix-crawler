@@ -8,6 +8,7 @@ type Statistics struct {
 	CurrentPageCollectedMovies				int									`json:"page-collected-movies,omitempty"`
 	TotalNumberOfMovies						int									`json:"total-movies,omitempty"`
 	CurrentMovie							int									`json:"current-movie,omitempty"`
+	NumberOfEpisodes						int									`json:"episodes-length,omitempty"`
 	Available								int									`json:"available,omitempty"`
 	UnAvailable								int									`json:"unavailable,omitempty"`
 	Uploaded								int									`json:"uploaded,omitempty"`
