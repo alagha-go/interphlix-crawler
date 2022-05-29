@@ -70,5 +70,6 @@ func (Tvshow *TvShow) Upload() {
 	if err != nil {
 		return
 	}
+    Uploaded++
 	Tvshow.Uploaded = true
 }
