@@ -31,6 +31,10 @@ func GetStats(res http.ResponseWriter, req *http.Request) {
 			CurrentPageCollectedMovies: movies.CurrentPageCollectedMovies,
 			TotalNumberOfMovies: len(movies.Movies),
 			CurrentMovie: movies.CurrentMovie,
+			Available: movies.Available,
+			UnAvailable: movies.CurrentMovie-movies.Available,
+			Uploaded: movies.Uploaded,
+			UnUploaded: movies.CurrentMovie-movies.Uploaded,
 		},
 		{
 			Type: "Tv-Show",
