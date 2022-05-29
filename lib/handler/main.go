@@ -1,8 +1,8 @@
 package handler
 
 import (
-	"crawler/lib/movies"
-	"crawler/lib/tvshows"
+	"crawler/lib/crawler/movies"
+	"crawler/lib/crawler/tvshows"
 	"encoding/json"
 	"log"
 	"net/http"
