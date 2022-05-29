@@ -1,7 +1,7 @@
 package handler
 
 import (
-	"crawler/lib/tvshows"
+	"crawler/lib/crawler/tvshows"
 	"encoding/json"
 	"io/ioutil"
 	"net/http"
@@ -15,8 +15,8 @@ func GetAllTvShows(res http.ResponseWriter, req *http.Request) {
 }
 
 func GetUnAvailableTvShows(res http.ResponseWriter, req *http.Request) {
-	var TvShows []tvshows.Movie
-	var UnAvailableTvShows []tvshows.Movie
+	var TvShows []tvshows.TvShow
+	var UnAvailableTvShows []tvshows.TvShow
 	data, err := ioutil.ReadFile("./DB/Tvshows/tvshows.json")
 	HandleError(err)
 	json.Unmarshal(data, &TvShows)
@@ -30,8 +30,8 @@ func GetUnAvailableTvShows(res http.ResponseWriter, req *http.Request) {
 
 
 func GetUnUploadedTvShows(res http.ResponseWriter, req *http.Request) {
-	var TvShows []tvshows.Movie
-	var UnUploadedTvShows []tvshows.Movie
+	var TvShows []tvshows.TvShow
+	var UnUploadedTvShows []tvshows.TvShow
 	data, err := ioutil.ReadFile("./DB/Tvshows/tvshows.json")
 	HandleError(err)
 	json.Unmarshal(data, &TvShows)
