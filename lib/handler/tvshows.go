@@ -21,7 +21,7 @@ func GetUnAvailableTvShows(res http.ResponseWriter, req *http.Request) {
 	HandleError(err)
 	json.Unmarshal(data, &TvShows)
 	for _, TvShow := range TvShows {
-		if !TvShow.Available {
+		if !TvShow.Available && TvShow.Collected {
 			UnAvailableTvShows = append(UnAvailableTvShows, TvShow)
 		}
 	}
@@ -36,7 +36,7 @@ func GetUnUploadedTvShows(res http.ResponseWriter, req *http.Request) {
 	HandleError(err)
 	json.Unmarshal(data, &TvShows)
 	for _, TvShow := range TvShows {
-		if !TvShow.Uploaded {
+		if !TvShow.Uploaded && TvShow.Collected {
 			UnUploadedTvShows = append(UnUploadedTvShows, TvShow)
 		}
 	}
