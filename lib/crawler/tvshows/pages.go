@@ -23,7 +23,6 @@ func CollectPages(PagesLength int) {
 	}
 	SaveTvShows()
 	PrintBlue(len(TvShows))
-	PrintCyan(EpisodesLength)
 	PrintGreen("done collecting all the pages data")
 
 	for index := range TvShows {
