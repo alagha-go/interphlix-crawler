@@ -19,6 +19,8 @@ var (
 	CurrentPageNumber int
 	CurrentPageCollectedMovies int
 	TotalNumberOfMovies int
+	Available int
+	Uploaded int
 	CurrentMovie	int
 )
 
