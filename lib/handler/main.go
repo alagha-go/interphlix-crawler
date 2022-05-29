@@ -44,6 +44,10 @@ func GetStats(res http.ResponseWriter, req *http.Request) {
 			CurrentPageCollectedMovies: tvshows.CurrentPageCollectedMovies,
 			TotalNumberOfMovies: len(tvshows.TvShows),
 			CurrentMovie: tvshows.CurrentMovie,
+			Available: tvshows.Available,
+			UnAvailable: tvshows.CurrentMovie-tvshows.Available,
+			Uploaded: tvshows.Uploaded,
+			UnUploaded: tvshows.CurrentMovie-tvshows.Uploaded,
 		},
 	}
 
