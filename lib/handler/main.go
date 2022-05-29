@@ -1,8 +1,8 @@
 package handler
 
 import (
-	"crawler/lib/movies"
-	"crawler/lib/tvshows"
+	"crawler/lib/crawler/movies"
+	"crawler/lib/crawler/tvshows"
 	"encoding/json"
 	"log"
 	"net/http"
@@ -13,8 +13,6 @@ func Main() {
 	go movies.Main()
 	go tvshows.Main()
 	http.HandleFunc("/", GetStats)
-	http.HandleFunc("/movies/pages", MoviePages)
-	http.HandleFunc("/tv-shows/pages", TvShowsPages)
 	http.HandleFunc("/movies/all", GetAllMovies)
 	http.HandleFunc("/tv-shows/all", GetAllTvShows)
 	http.HandleFunc("/movies/unavailable", GetUnAvailableMovies)
@@ -24,11 +22,36 @@ func Main() {
 }
 
 func GetStats(res http.ResponseWriter, req *http.Request) {
-	MovieType := Stats{"Movie", movies.LoopNumber, movies.PagesPosition, movies.MoviesPosition, movies.Available, movies.MoviesPosition-movies.Available, movies.UploadedMovies, movies.MoviesPosition-movies.UploadedMovies}
-	TvShowType := Stats{"Tv-Show", tvshows.LoopNumber, tvshows.PagesPosition, tvshows.MoviesPosition, tvshows.Available, tvshows.MoviesPosition-tvshows.Available, tvshows.UploadedMovies, tvshows.MoviesPosition-tvshows.UploadedMovies}
-	var StatsData = []Stats{MovieType, TvShowType}
-	res.WriteHeader(200)
-	json.NewEncoder(res).Encode(StatsData)
+	Statistics := []Statistics{
+		{
+			Type: "Movie",
+			LoopNumber: movies.LoopNumber,
+			PagesLength: movies.TotalNumberOfPages,
+			CurrentPageNumber: movies.CurrentPageNumber,
+			CurrentPageCollectedMovies: movies.CurrentPageCollectedMovies,
+			TotalNumberOfMovies: len(movies.Movies),
+			CurrentMovie: movies.CurrentMovie,
+			Available: movies.Available,
+			UnAvailable: movies.CurrentMovie-movies.Available,
+			Uploaded: movies.Uploaded,
+			UnUploaded: movies.CurrentMovie-movies.Uploaded,
+		},
+		{
+			Type: "Tv-Show",
+			LoopNumber: tvshows.LoopNumber,
+			PagesLength: tvshows.TotalNumberOfPages,
+			CurrentPageNumber: tvshows.CurrentPageNumber,
+			CurrentPageCollectedMovies: tvshows.CurrentPageCollectedMovies,
+			TotalNumberOfMovies: len(tvshows.TvShows),
+			CurrentMovie: tvshows.CurrentMovie,
+			Available: tvshows.Available,
+			UnAvailable: tvshows.CurrentMovie-tvshows.Available,
+			Uploaded: tvshows.Uploaded,
+			UnUploaded: tvshows.CurrentMovie-tvshows.Uploaded,
+		},
+	}
+
+	json.NewEncoder(res).Encode(Statistics)
 }
 
 func HandleError(err error) {

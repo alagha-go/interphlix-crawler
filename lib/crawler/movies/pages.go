@@ -1,26 +1,40 @@
 package movies
 
 import (
-	"encoding/json"
+	"fmt"
 	"io/ioutil"
 	"strconv"
 	"strings"
 
-	"github.com/cheggaaa/pb/v3"
 	"github.com/gocolly/colly"
 )
 
 
 func CollectPages(PagesLength int) {
-	bar := pb.StartNew(PagesLength)
+	TotalNumberOfPages = PagesLength
 	for index:=1; index<PagesLength+1; index++ {
+		CurrentPageNumber = index
 		CollectPageMovies(index)
-		bar.Increment()
-		PagesPosition = index
+		if index % 50 == 0 {
+			PrintYellow(fmt.Sprintf("Movies    :%d",index))
+		}
+		SaveMovies()
 	}
-	bar.Finish()
-	SavePagesData()
+	PrintBlue(len(Movies))
+	SaveMovies()
 	PrintGreen("done collecting all the pages data")
+
+	for index := range Movies {
+		CurrentMovie = index+1
+		if !Movies[index].Collected {
+			Movies[index].SetServers()
+			Movies[index].Collected = true
+		}
+		if !Movies[index].Uploaded {
+			Movies[index].Upload()
+		}
+		SaveMovies()
+	}
 }
 
 
@@ -35,26 +49,24 @@ func CollectPageMovies(page int) {
 
 
 func CollectMovies(element *colly.HTMLElement) {
-	element.ForEach(".flw-item", func(_ int, element *colly.HTMLElement) {
+	element.ForEach(".flw-item", func(pos int, element *colly.HTMLElement) {
+		CurrentPageCollectedMovies = pos
 		var Movie Movie
+		Movie.SetMovieID()
         Movie.Title = element.ChildAttr("a", "title")
         Movie.ImageUrl = element.ChildAttr("img", "data-src")
         Movie.PageUrl = "https://tinyzonetv.to" + element.ChildAttr("a", "href")
 		index := strings.Index(Movie.PageUrl, "free-")
     	Movie.Code = Movie.PageUrl[index+5:]
-		Movie.Type = "Movie"
-		PagesMovies = append(PagesMovies, Movie)
+		if !Movie.Exists() {
+			Movie.CollectMovieContent()
+			Movies = append(Movies, Movie)
+		}
 	})
 }
 
-func LoadDBPages() {
-	data, err := ioutil.ReadFile("./DB/Movies/pages.json")
-	HanleError(err)
-	json.Unmarshal(data, &DBPages)
-}
 
-
-func SavePagesData() {
-	data := JsonMarshal(PagesMovies)
-	ioutil.WriteFile("./DB/Movies/pages.json", data, 0755)
+func SaveMovies() {
+	data := JsonMarshal(Movies)
+	ioutil.WriteFile("./DB/Movies/movies.json", data, 0755)
 }

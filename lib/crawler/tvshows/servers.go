@@ -1,14 +1,11 @@
 package tvshows
 
 import (
-	// "log"
-	"log"
 	"strings"
 
 	"github.com/gocolly/colly"
 	"go.mongodb.org/mongo-driver/bson/primitive"
 )
-
 
 func (Episode *Episode)SetServers() {
 	collector := colly.NewCollector()
@@ -29,6 +26,7 @@ func (Episode *Episode)SetServers() {
 	Episode.SetID()
 	Episode.AddServer()
 	Episode.SetServer()
+	Episode.SetServer()
 }
 
 
@@ -36,13 +34,9 @@ func (Episode *Episode)SetID() {
 	for index, server := range Episode.Servers {
 		url := "https://tinyzonetv.to/ajax/get_link/"+ server.WatchID
 		data, _, err := GetRequest(url, false)
-		if err != nil {
-			log.Panic(err)
-		}
+		HanleError(err)
 		res, err := UnmarshalLinkResponse(data)
-		if err != nil {
-			log.Panic(err)
-		}
+		HanleError(err)
         if server.Name == "Streamlare" {
 			Episode.Servers[index].Id = strings.ReplaceAll(res.Link, "https://streamlare.com/e/", "")
 			Episode.Servers[index].Url = "https://streamlare.com/v/" + Episode.Servers[index].Id
@@ -93,10 +87,12 @@ func (Episode *Episode)AddServers(element *colly.HTMLElement) {
 }
 
 
+
 func (Episode *Episode) SetServer() {
 	for index := range Episode.Servers {
 		if Episode.Servers[index].Name == "Streamlare" {
 			Episode.Server = &Episode.Servers[index]
+			Episode.Available = true
 		}
 	}
 }

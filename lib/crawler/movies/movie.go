@@ -1,6 +1,7 @@
 package movies
 
 import (
+	"encoding/json"
 	"strings"
 
 	"github.com/gocolly/colly"
@@ -21,7 +22,6 @@ func (Movie *Movie)CollectMovieContent() {
 
     
     collector.OnHTML(".elements", Movie.SetElements)
-    Movie.SetServers()
     
     collector.Visit(Movie.PageUrl)
 }
@@ -40,6 +40,7 @@ func (Movie *Movie)SetElements(element *colly.HTMLElement) {
     })
 }
 
+
 func (Movie *Movie) SetMovieID() {
     ID := primitive.NewObjectID()
     for _, movie := range Movies {
@@ -48,4 +49,26 @@ func (Movie *Movie) SetMovieID() {
         }
     }
     Movie.ID = ID
+}
+
+
+func (Movie *Movie) Exists() bool {
+	for index := range Movies {
+		if Movie.Code == Movies[index].Code {
+			return true
+		}
+	}
+	return false
+}
+
+
+func (movie *Movie) Upload() {
+	var newMovie Movie
+	data, _, _ := PostRequest("https://s1.interphlix.com/movies/upload", JsonMarshal(movie), false)
+	err := json.Unmarshal(data, &newMovie)
+	if err != nil {
+		return
+	}
+    Uploaded++
+	movie.Uploaded = true
 }

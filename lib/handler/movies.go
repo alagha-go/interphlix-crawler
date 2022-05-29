@@ -1,7 +1,7 @@
 package handler
 
 import (
-	"crawler/lib/movies"
+	"crawler/lib/crawler/movies"
 	"encoding/json"
 	"io/ioutil"
 	"net/http"

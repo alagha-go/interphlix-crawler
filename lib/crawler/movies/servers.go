@@ -1,7 +1,6 @@
 package movies
 
 import (
-	"log"
 	"strings"
 
 	"github.com/gocolly/colly"
@@ -35,13 +34,9 @@ func (Movie *Movie)SetID() {
 	for index, server := range Movie.Servers {
 		url := "https://tinyzonetv.to/ajax/get_link/"+ server.WatchID
 		data, _, err := GetRequest(url, false)
-		if err != nil {
-			log.Panic(err)
-		}
+		HanleError(err)
 		res, err := UnmarshalLinkResponse(data)
-		if err != nil {
-			log.Panic(err)
-		}
+		HanleError(err)
         if server.Name == "Streamlare" {
 			Movie.Servers[index].Id = strings.ReplaceAll(res.Link, "https://streamlare.com/e/", "")
 			Movie.Servers[index].Url = "https://streamlare.com/v/" + Movie.Servers[index].Id
@@ -95,6 +90,8 @@ func (Movie *Movie)AddServers(element *colly.HTMLElement) {
 func (Movie *Movie) SetServer() {
 	for index := range Movie.Servers {
 		if Movie.Servers[index].Name == "Streamlare" {
+			Movie.Available = true
+			Available++
 			Movie.Server = &Movie.Servers[index]
 		}
 	}

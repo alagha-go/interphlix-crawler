@@ -8,7 +8,7 @@ import (
 )
 
 
-func (TvShow *Movie)GetSeasons() {
+func (TvShow *TvShow)GetSeasons() {
 	collector := colly.NewCollector()
 	url := "https://tinyzonetv.to/ajax/v2/tv/seasons/" + TvShow.Code
 
@@ -17,7 +17,7 @@ func (TvShow *Movie)GetSeasons() {
 	collector.Visit(url)
 }
 
-func (TvShow *Movie)CollectAllSeasons(element *colly.HTMLElement) {
+func (TvShow *TvShow)CollectAllSeasons(element *colly.HTMLElement) {
 	element.ForEach("a", func(index int, element *colly.HTMLElement) {
 		var Season Season
 		Season.ID = primitive.NewObjectID()
@@ -30,16 +30,26 @@ func (TvShow *Movie)CollectAllSeasons(element *colly.HTMLElement) {
 }
 
 
-func (TvShow *Movie) SeasonExist(Season Season) bool {
+func (TvShow *TvShow) FindSeason(code string) Season {
 	for index := range TvShow.Seasons {
-		if Season.Code == TvShow.Seasons[index].Code {
-			return true
+		if TvShow.Seasons[index].Code == code {
+			return TvShow.Seasons[index]
 		}
 	}
-	return false
+	return Season{}
 }
 
-func (TvShow *Movie) UpdateSeason(Season Season) {
+func (TvShow *TvShow) FindSeasonIndex(code string) int {
+	for index := range TvShow.Seasons {
+		if TvShow.Seasons[index].Code == code {
+			return index
+		}
+	}
+	return -1
+}
+
+
+func (TvShow *TvShow) UpdateSeason(Season Season) {
 	url := fmt.Sprintf("https://s1.interphlix.com/tv-shows/%s/addseason", TvShow.ID.Hex())
 	body := JsonMarshal(Season)
 	PostRequest(url, body, false)

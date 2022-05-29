@@ -41,3 +41,7 @@ func PrintPurple(value interface{}) {
 func PrintCyan(value interface{}) {
 	fmt.Printf("%s%v%s\n",colorCyan, value, colorReset)
 }
+
+func PrintWhite(value interface{}) {
+	fmt.Printf("%s%v%s\n",colorWhite, value, colorReset)
+}

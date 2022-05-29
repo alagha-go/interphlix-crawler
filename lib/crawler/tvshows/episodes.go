@@ -33,17 +33,8 @@ func (Season *Season)CollectAllEpisodes(element *colly.HTMLElement) {
 		Episode.Code = element.ChildAttr("a", "data-id")
 		Episode.SetServers()
 		Season.Episodes = append(Season.Episodes, Episode)
+		EpisodesLength = EpisodesLength+len(Season.Episodes)
 	})
-}
-
-
-func (Season *Season) EpisodeExist(Episode Episode) bool {
-	for index := range Season.Episodes {
-		if Episode.Code == Season.Episodes[index].Code {
-			return true
-		}
-	}
-	return false
 }
 
 func (Episode *Episode) UpdateEpisode(MovieID, SeasonID primitive.ObjectID) {

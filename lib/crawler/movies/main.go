@@ -1,8 +1,9 @@
-package tvshows
+package movies
 
 import (
 	"bytes"
 	"encoding/json"
+	"io/ioutil"
 	"log"
 	"strconv"
 	"strings"
@@ -11,29 +12,30 @@ import (
 	"github.com/gocolly/colly"
 )
 
+
 var (
-	PagesTvShows []Movie
-	DBPages		[]Movie
-	TvShows		[]Movie
-	DBTvShows	[]Movie
-	LoopNumber int = 1
-	PagesPosition int
-	MoviesPosition int
+	Movies []Movie
+	LoopNumber int
+	TotalNumberOfPages int
+	CurrentPageNumber int
+	CurrentPageCollectedMovies int
+	TotalNumberOfMovies int
 	Available int
-	UploadedMovies int
+	Uploaded int
+	CurrentMovie	int
 )
+
 
 func Main() {
 	for {
-		LoadDBPages()
-		LoadDBTvShows()
-		CollectPages(GetNumberOfPages())
-		CollectAllTvShows()
-		UploadUnUploadedTvShows()
 		LoopNumber++
+		LoadMovies()
+		CollectPages(GetNumberOfPages())
+		UploadUnUploadedMovies()
 		time.Sleep(48*time.Hour)
 	}
 }
+
 
 func GetNumberOfPages() int {
 	var err error
@@ -45,17 +47,25 @@ func GetNumberOfPages() int {
 			title := element.ChildAttr("a", "title")
 			href := element.ChildAttr("a", "href")
 			if title == "Last" {
-				href = strings.ReplaceAll(href, "/tv-show?page=", "")
+				href = strings.ReplaceAll(href, "/movie?page=", "")
 				numberofPages, err = strconv.Atoi(href)
 				HanleError(err)
 			}
 		})
 	})
 
-	collector.Visit("https://tinyzonetv.to/tv-show")
+	collector.Visit("https://tinyzonetv.to/movie")
 
 	return numberofPages
 }
+
+
+func LoadMovies() {
+	data, err := ioutil.ReadFile("./DB/Movies/movies.json")
+	HanleError(err)
+	json.Unmarshal(data, &Movies)
+}
+
 
 
 func JsonMarshal(data interface{}) []byte {

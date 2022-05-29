@@ -9,7 +9,7 @@ import (
 )
 
 
-func (TvShow *Movie)SetReleased(element *colly.HTMLElement) {
+func (TvShow *TvShow)SetReleased(element *colly.HTMLElement) {
     layout := "2006-01-02"
     released := element.Text
     released = strings.ReplaceAll(released, "Released: ", "")
@@ -21,19 +21,19 @@ func (TvShow *Movie)SetReleased(element *colly.HTMLElement) {
     TvShow.Released = &Released
 }
 
-func (TvShow *Movie)SetGenre(element *colly.HTMLElement) {
+func (TvShow *TvShow)SetGenre(element *colly.HTMLElement) {
     element.ForEach("a", func(index int, element *colly.HTMLElement){
         TvShow.Genres = append(TvShow.Genres, element.Text)
     })
 }
 
-func (TvShow *Movie)SetCasts(element *colly.HTMLElement) {
+func (TvShow *TvShow)SetCasts(element *colly.HTMLElement) {
     element.ForEach("a", func(index int, element *colly.HTMLElement){
         TvShow.Casts = append(TvShow.Casts, element.Text)
     })
 }
 
-func (TvShow *Movie)SetDuration(element *colly.HTMLElement) {
+func (TvShow *TvShow)SetDuration(element *colly.HTMLElement) {
     duration := element.Text
     duration = strings.ReplaceAll(duration, "Duration: ", "")
     duration = strings.ReplaceAll(duration, "  ", "")
@@ -49,13 +49,13 @@ func (TvShow *Movie)SetDuration(element *colly.HTMLElement) {
     }
 }
 
-func (TvShow *Movie)SetCountries(element *colly.HTMLElement) {
+func (TvShow *TvShow)SetCountries(element *colly.HTMLElement) {
     element.ForEach("a", func(index int, element *colly.HTMLElement){
         TvShow.Countries = append(TvShow.Countries, element.Text)
     })
 }
 
-func (TvShow *Movie)SetProducers(element *colly.HTMLElement) {
+func (TvShow *TvShow)SetProducers(element *colly.HTMLElement) {
     production := element.Text
     production = strings.ReplaceAll(production, "Production: ", "")
     production = strings.ReplaceAll(production, "  ", "")
