@@ -21,7 +21,7 @@ func GetUnAvailableMovies(res http.ResponseWriter, req *http.Request) {
 	HandleError(err)
 	json.Unmarshal(data, &Movies)
 	for _, Movie := range Movies {
-		if !Movie.Available {
+		if !Movie.Available && Movie.Collected {
 			UnAvailableMovies = append(UnAvailableMovies, Movie)
 		}
 	}
@@ -35,7 +35,7 @@ func GetUnUploadedMovies(res http.ResponseWriter, req *http.Request) {
 	HandleError(err)
 	json.Unmarshal(data, &Movies)
 	for _, Movie := range Movies {
-		if !Movie.Uploaded {
+		if !Movie.Uploaded && Movie.Collected {
 			UnUploadeMovies = append(UnUploadeMovies, Movie)
 		}
 	}
