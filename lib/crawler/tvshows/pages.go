@@ -19,6 +19,7 @@ func CollectPages(PagesLength int) {
 		if index % 20 == 0 {
 			PrintYellow(fmt.Sprintf("TvShows   :%d",index))
 		}
+		SaveTvShows()
 	}
 	SaveTvShows()
 	PrintBlue(len(TvShows))
