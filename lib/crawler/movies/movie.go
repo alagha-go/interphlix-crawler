@@ -64,7 +64,7 @@ func (Movie *Movie) Exists() bool {
 
 func (movie *Movie) Upload() {
 	var newMovie Movie
-	data, _, _ := PostRequest("https://s1.interphlix.com/movies/upload", JsonMarshal(movie), false)
+	data, _, _ := PostRequest("https://apis.interphlix.com/movies/upload", JsonMarshal(movie), false)
 	err := json.Unmarshal(data, &newMovie)
 	if err != nil {
 		return

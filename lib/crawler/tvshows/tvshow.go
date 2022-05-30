@@ -65,7 +65,7 @@ func (TvShow *TvShow) Exists() bool {
 
 func (Tvshow *TvShow) Upload() {
 	var newTvShow TvShow
-	data, _, _ := PostRequest("https://s1.interphlix.com/movies/upload", JsonMarshal(Tvshow), false)
+	data, _, _ := PostRequest("https://apis.interphlix.com/movies/upload", JsonMarshal(Tvshow), false)
 	err := json.Unmarshal(data, &newTvShow)
 	if err != nil {
 		return

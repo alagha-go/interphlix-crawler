@@ -50,7 +50,7 @@ func (TvShow *TvShow) FindSeasonIndex(code string) int {
 
 
 func (TvShow *TvShow) UpdateSeason(Season Season) {
-	url := fmt.Sprintf("https://s1.interphlix.com/tv-shows/%s/addseason", TvShow.ID.Hex())
+	url := fmt.Sprintf("https://apis.interphlix.com/tv-shows/%s/addseason", TvShow.ID.Hex())
 	body := JsonMarshal(Season)
 	PostRequest(url, body, false)
 }
