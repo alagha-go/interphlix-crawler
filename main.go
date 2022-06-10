@@ -1,9 +1,8 @@
 package main
 
 import (
-	"crawler/lib/crawler/movies"
-	// "crawler/lib/handler"
-	// "net/http"
+	"crawler/lib/handler"
+	"net/http"
 )
 
 var (
@@ -11,7 +10,6 @@ var (
 )
 
 func main() {
-	movies.LoadMovies()
-	// handler.Main()
-	// http.ListenAndServe(PORT, nil)
+	handler.Main()
+	http.ListenAndServe(PORT, nil)
 }
