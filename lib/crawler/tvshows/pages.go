@@ -40,12 +40,6 @@ func CollectPages(PagesLength int) {
 			TvShows[index].GetSeasons()
 			TvShows[index].Collected = true
 		}
-		if !TvShows[index].Uploaded {
-			TvShows[index].Upload()
-		}else {
-			TvShows[index].Update()
-		}
-		SaveTvShows()
 	}
 }
 
