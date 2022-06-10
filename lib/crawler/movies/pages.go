@@ -31,6 +31,7 @@ func CollectPages(PagesLength int) {
 			Movies[index].Collected = true
 		}
 		if !Movies[index].Uploaded {
+			Movies[index].Type = "Movie"
 			Movies[index].Upload()
 		}
 		SaveMovies()
